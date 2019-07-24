@@ -394,7 +394,7 @@ namespace SFA.DAS.AssessorService.Data
             {
                 var certificate =
                     await _context.Certificates.FirstOrDefaultAsync(q => q.CertificateReference == certificateReference && 
-                    q.BatchNumber == null && q.Status == CertificateStatus.Submitted);
+                    (q.BatchNumber == null && q.Status == CertificateStatus.Submitted) || (q.BatchNumber != null && q.Status == CertificateStatus.Reprint));
                 if (certificate != null)
                 {
                     certificate.BatchNumber = updateCertificateBatchNumberRequest.BatchNumber;
